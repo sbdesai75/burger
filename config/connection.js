@@ -1,18 +1,18 @@
-var express = require("express");
-
-var router = express.Router();
-
-// Import the model (diets.js) to use its database functions.
-var burgers = require("../models/burgers_controller.js");
-
-app.get("/items", function(req, res){
-    db.Items.findAll({ 
-        where: 
-        { name: req.params.categories }
-    })
-    .then
-    (function(dbDiets) {
-    
-    console.log(dbDiets)
-  });
+var mysql = require("mysql");
+ var connection = mysql.createConnection({
+  port: 3000,
+  host: "localhost",
+  user: "root",
+  password: "JLD02062018",
+  database: "burgers_db"
 });
+ // Make connection.
+connection.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  console.log("connected as id " + connection.threadId);
+});
+ // Export connection for our ORM to use.
+module.exports = connection;
